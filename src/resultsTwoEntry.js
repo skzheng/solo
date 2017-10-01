@@ -7,7 +7,7 @@ class ResultsTwoEntry extends React.Component {
     super();
     this.state = {
       business: "",
-      reviews: []
+      reviews: ""
     };
     this.handleItemSelect = this.handleItemSelect.bind(this);
   }

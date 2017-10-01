@@ -25,6 +25,7 @@
     "mongoose": "^4.11.12",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "socket.io": "^2.0.3",
     "ssl-root-cas": "^1.2.4",
     "webpack": "^3.6.0",
     "webpack-dev-middleware": "^1.12.0",
