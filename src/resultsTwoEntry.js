@@ -6,7 +6,8 @@ class ResultsTwoEntry extends React.Component {
   constructor() {
     super();
     this.state = {
-      business: ""
+      business: "",
+      reviews: []
     };
     this.handleItemSelect = this.handleItemSelect.bind(this);
   }
@@ -15,6 +16,15 @@ class ResultsTwoEntry extends React.Component {
     axios.post('/business', {id: this.props.item.id})
     .then(data => {
       this.setState({business: data.data});
+    })
+    .catch(error => {
+      console.log(error);
+    })
+
+    axios.post('/reviews', {id: this.props.item.id})
+    .then(data => {
+      console.log(data.data);
+      this.setState({reviews : data.data.reviews});
     })
     .catch(error => {
       console.log(error);
@@ -63,7 +73,7 @@ class ResultsTwoEntry extends React.Component {
             <span className="sr-only">Next</span>
           </a>
         </div>
-        
+
         <span className="describe"> CATEGORIES </span>
         <div className="card-text">{this.props.item.categories.reduce((array,item) => {
           array.push(item.title);

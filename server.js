@@ -4,11 +4,17 @@ const webpack = require('webpack');
 const webpackConfig = require('./webpack.config.js');
 const yelp = require('yelp-fusion');
 const parser = require('body-parser');
+const compiler = webpack(webpackConfig);
 require('ssl-root-cas').inject();
 const app = express();
-app.use(parser.json());
-const compiler = webpack(webpackConfig);
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
+// SOCKETS ============
+io.on('connection', function(socket){
+  console.log('a user connected');
+});
+// ====================
 // YELP API ===========
 
 const clientId = 'vu7tgLOf6OAAfuCJo8AcLQ';
@@ -24,8 +30,8 @@ const client = yelp.client(token);
 
 //======================
 
+app.use(parser.json());
 app.use(express.static(__dirname + '/www'));
-// app.use(express.static(__dirname + '/src'));
 app.use(webpackDevMiddleware(compiler, {
   hot: true,
   filename: 'bundle.js',
@@ -36,6 +42,7 @@ app.use(webpackDevMiddleware(compiler, {
   historyApiFallback: true,
 }));
  
+// HANDLERS ===========
 app.post('/random', function(req,res){
   console.log(req.body.term);
   client.search({
@@ -71,10 +78,20 @@ app.post('/business', function(req,res){
     res.send(response.jsonBody);
   })
   .catch(error => {
-    console.low(error);
+    console.log(error);
   })
 })
 
+app.post('/reviews', function(req, res){
+  client.reviews(req.body.id)
+  .then(response => {
+    res.send(response.jsonBody);
+  })
+  .catch(error => {
+    console.log(error)
+  })
+})
+// ==================
 const server = app.listen(3000, function() {
   const host = server.address().address;
   const port = server.address().port;

@@ -24,7 +24,7 @@ body {
 	align-items: baseline;
 	color: black;
 	font-size: 25px;
-	bottom: 5px;
+	bottom: 45px;
 	opacity: .7;
 }
 .button {
@@ -106,15 +106,8 @@ body {
 	flex-direction: column;
 }
 
-.randomButtonDiv {
-	margin-top: 20px;
-	display: flex;
-	justify-content: center;
-	align-items: center;	
-}
 
 .highlighted {
-	/*border: solid 5px rgba(70,69,98, 1);*/
 	box-shadow: 0 25px 25px 0 rgba(0, 0, 0, .2), 0 15px 20px 0 rgba(0, 0, 0, .5);
 }
 
@@ -122,6 +115,7 @@ body {
 	margin-left: 48%;
 	margin-top: 15px;
 	margin-bottom: 15px;
+	padding: 15px 32px;
 }
 
 .okButton:hover {

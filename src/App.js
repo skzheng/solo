@@ -75,12 +75,3 @@ class App extends React.Component {
   }
 }
 export default App;
-
-
-
- // <input onChange={this.handleCategoryInput} placeholder="Enter category"/>
- //            <div id="slidecontainer">
- //              $<input className="slider" type="range" min="1" max="4" step="1" defaultValue="1"/>$$$$
- //            </div>
- //          </div>
- //          <div className="randomButtonDiv">

@@ -7,7 +7,6 @@ class Navbar extends React.Component {
     };
   }
 
-
   render() {
     return (
       <div className="navbar navbar-dark" >
@@ -18,5 +17,3 @@ class Navbar extends React.Component {
 }
 
 export default Navbar;
-// <a className="navbar-brand" href="/">SOLO WEEK</a>
-// style={{backgroundColor: "#e3f2fd"}}
