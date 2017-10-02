@@ -4,9 +4,10 @@ body {
 .logo {
 	width: 30%;
 	padding: 10px 0 10px 0;
+	margin-left: 50px;
 }
 .background {
-	background: url("./img/back70.png") fixed center;
+	background: url("./img/70s.png") fixed center;
 	background-size: 100% 100%;
 	/*background-color: rgba(0,0,0,.5);*/
 	filter: blur(1px);
@@ -18,7 +19,7 @@ body {
 	width: 100%;
 }
 .header {
-	font-family: 'Roboto Slab', serif; 
+	font-family: 'Roboto', serif; 
 	display: flex;
 	justify-content: center;
 	align-items: baseline;
@@ -69,7 +70,7 @@ body {
     box-shadow: 0 0 0 0 rgba(84,44,44, 1);
   }
   70% {
-      box-shadow: 0 0 0 9px rgba(84,44,44, 0);
+      box-shadow: 0 0 0 7px rgba(84,44,44, 0);
   }
   100% {
       box-shadow: 0 0 0 0 rgba(84,44,44, 0);
@@ -77,12 +78,13 @@ body {
 }
 .progress-bar {
 	height: 3px;
-	width: 80%;
+	width: 100%;
 	background-color: #565d68;
 }
 .progress {
-	width: 75%;
-	animation: pulse 2s infinite;
+	width: 100%;
+	/*animation: pulse 2s infinite;*/
+	bottom: 0px;
 	/*margin-left: 25%;*/
 }
 
@@ -112,10 +114,11 @@ body {
 }
 
 .okButton{
-	margin-left: 48%;
+	margin-left: 47%;
 	margin-top: 15px;
 	margin-bottom: 15px;
 	padding: 15px 32px;
+	animation: pulse 2s infinite;
 }
 
 .okButton:hover {
@@ -134,7 +137,7 @@ body {
 
 .card2 {
 	margin: 5px;
-	max-width: 600px;
+	max-width: 500px;
 }
 
 .card-header {
@@ -156,7 +159,7 @@ body {
 }
 
 .cardimgtop2 {
-	height: 500px;
+	height: 400px;
 	/*height:auto;*/
 	width: 100%;
 }

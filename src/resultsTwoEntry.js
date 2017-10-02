@@ -56,14 +56,10 @@ class ResultsTwoEntry extends React.Component {
             {this.state.business.photos ? this.state.business.photos.map((items,i) => {
               if(i !== 0){
               return <div className="carousel-item" key={i}>
-                <img className="d-block w-100 cardimgtop2 NONO" src={items}/>
-               </div>
-              }
-            })
-            :
-            null
-            }
-          </div>
+                      <img className="d-block w-100 cardimgtop2 NONO" src={items}/>
+                     </div>
+              }}) : null}
+            </div>
           <a className="carousel-control-prev NONO" href={`#carouselImages${this.props.ind}`} role="button" data-slide="prev">
             <span className="carousel-control-prev-icon NONO" aria-hidden="true"></span>
             <span className="sr-only">Previous</span>
@@ -88,8 +84,21 @@ class ResultsTwoEntry extends React.Component {
         <p className="card-text">{this.props.item.price}</p>
         <span className="describe"> RATING </span>
         <p className="card-text">{this.props.item.rating}</p>
-        <span className="describe"> REVIEWS </span>
-        <p className="card-text">{this.props.item.review_count}</p>     
+        <span className="describe"> REVIEWS ({this.props.item.review_count})</span>
+
+        {this.state.reviews ? 
+          this.state.reviews.map((items, i) => {
+            return <div className="card2 NONO">
+            <div className="row NONO">
+                <div className="col-md-12 NONO">
+                  <p className="card-text NONO">{items.user.name} {items.rating} | {items.text}</p> 
+                </div>
+              </div>
+          </div>
+        })
+        : null}
+
+
         <a className="card-text" href={this.props.item.url} target="_blank">More Information</a>
       </div>
     );

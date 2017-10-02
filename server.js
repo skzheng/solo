@@ -10,11 +10,19 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
+
+
 // SOCKETS ============
 io.on('connection', function(socket){
   console.log('a user connected');
+   socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+  // socket.on('change', function(){
+  // }) 
 });
 // ====================
+
 // YELP API ===========
 
 const clientId = 'vu7tgLOf6OAAfuCJo8AcLQ';
@@ -42,6 +50,27 @@ app.use(webpackDevMiddleware(compiler, {
   historyApiFallback: true,
 }));
  
+
+// TWILIO ========
+const accountSid = 'ACcb99ee6ba943563febfd3cca72d06f6f';
+const authToken = '99e0d2ad20452d7ee4b2fd6812a42d80';
+const twilio = require('twilio');
+const twilioClient = new twilio(accountSid, authToken);
+
+app.post('/message', function(req,res) {
+  console.log('afsdfsdf');
+  console.log(req.body);
+
+  twilioClient.messages.create({
+    body: req.body.message,
+    to: req.body.number,
+    from: '+12019034667'
+  })
+  .then((message) =>
+    console.log(message.sid));
+})
+//==================
+
 // HANDLERS ===========
 app.post('/random', function(req,res){
   console.log(req.body.term);
@@ -52,7 +81,7 @@ app.post('/random', function(req,res){
     // location: "new york, ny",
     latitude: req.body.latitude,
     longitude: req.body.longitude,
-    // radius: 1000,
+    radius: 1000,
     open_now: true
   })
   .then(response => {
@@ -92,7 +121,7 @@ app.post('/reviews', function(req, res){
   })
 })
 // ==================
-const server = app.listen(3000, function() {
+const server = http.listen(3000, function() {
   const host = server.address().address;
   const port = server.address().port;
   console.log('Example app listening at http://%s:%s', host, port);

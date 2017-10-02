@@ -43,6 +43,13 @@ class ResultsFive extends React.Component {
       <div className="">
         {this.state.showResultsTwo ? <ResultsTwo selected={this.state.selected}/> :
           <div className="cardsFive">
+            <div className="bar">
+              <div className="progress">
+                <div className="progress-bar progress-bar-success" role="progressbar"
+                  aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style={{width: 33+'%'}}>
+                </div>
+              </div>
+            </div>
             <div className="card-group">
             {this.props.results.map((item, i) => {
                   return <ResultsFiveEntry  clickEvent={this.handlePickCss} item={item} key={i} ind={i} handleSelect={this.handleSelect}/>
@@ -50,13 +57,6 @@ class ResultsFive extends React.Component {
               }
             </div>
             <button className="btn btn-secondary okButton" onClick={this.handleSubmit}>OK!</button>
-            <div className="bar">
-              <div className="progress">
-                <div className="progress-bar progress-bar-success" role="progressbar"
-                  aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style={{width:50+'%'}}>
-                </div>
-              </div>
-            </div>
           </div>
         }
         

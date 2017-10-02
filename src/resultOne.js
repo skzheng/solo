@@ -6,9 +6,14 @@ class ResultOne extends React.Component {
   constructor() {
     super();
     this.state = {
-      business: ""
+      business: "",
+      reviews: "",
+      number: "",
+      message: ""
     };
     this.initMap = this.initMap.bind(this);
+    this.sendInfo = this.sendInfo.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
   
   componentDidMount(){
@@ -21,6 +26,31 @@ class ResultOne extends React.Component {
     .catch(error => {
       console.log(error);
     })
+
+    axios.post('/reviews', {id: this.props.item.id})
+    .then(data => {
+      console.log(data.data);
+      this.setState({reviews : data.data.reviews});
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  }
+
+  sendInfo(){
+    console.log('sent');
+
+    axios.post('/message', {number: this.state.number, message: `${this.props.item.name}` })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
+  handleInputChange(e){
+    this.setState({ number: `+1${e.target.value}` });
   }
 
   initMap() {
@@ -52,6 +82,14 @@ class ResultOne extends React.Component {
 
   render() {
     return (
+      <div>
+        <div className="bar">
+          <div className="progress">
+            <div className="progress-bar progress-bar-success" role="progressbar"
+              aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style={{width: 100+'%'}}>
+            </div>
+          </div>
+        </div>
       <div className="one">
       <div className="card card2">
         <p className="card-header">{this.props.item.name}</p>
@@ -86,6 +124,7 @@ class ResultOne extends React.Component {
             <span className="sr-only">Next</span>
           </a>
         </div>
+
         <span className="describe"> CATEGORIES </span>
         <div className="card-text">{this.props.item.categories.reduce((array,item) => {
           array.push(item.title);
@@ -100,11 +139,32 @@ class ResultOne extends React.Component {
         <p className="card-text">{this.props.item.price}</p>
         <span className="describe"> RATING </span>
         <p className="card-text">{this.props.item.rating}</p>
-        <span className="describe"> REVIEWS </span>
-        <p className="card-text">{this.props.item.review_count}</p>     
         <a className="card-text" href={this.props.item.url} target="_blank">More Information</a>
         </div>
-        <div id="map" style={{height: '250px', width: '400px'}}></div>
+        <div className="card card2">
+          <p className="card-header">Directions</p>
+          <div className="card-img-top">
+            <div id="map" style={{height: '400px', width: '500px'}}></div>
+          </div>
+        <span className="describe"> REVIEWS ({this.props.item.review_count})</span> 
+        {this.state.reviews ? 
+          this.state.reviews.map((items, i) => {
+            return <div className="card2">
+            <div className="row">
+                <div className="col-md-12">
+                  <p className="card-text">{items.user.name} {items.rating} | {items.text}</p> 
+                </div>
+              </div>
+          </div>
+        })
+        : null}    
+
+        </div>
+      </div>
+        <div>
+          <input type="text" onChange={this.handleInputChange} placeholder="Enter phone number"/>
+          <button className="btn btn-secondary okButton"  onClick={this.sendInfo}>OK!</button>
+        </div>
       </div>
     );
   }

@@ -39,6 +39,13 @@ class ResultsTwo extends React.Component {
       <div className="">
         {this.state.showResultOne ? <ResultOne item={this.state.selected}/> :
           <div className="two">
+            <div className="bar">
+              <div className="progress">
+                <div className="progress-bar progress-bar-success" role="progressbar"
+                  aria-valuenow="66" aria-valuemin="0" aria-valuemax="100" style={{width: 66+'%'}}>
+                </div>
+              </div>
+            </div>
             <div className="card-group">
             {this.props.selected.map((item, i) => {
                   return <ResultsTwoEntry clickEvent={this.handlePick} item={item} key={i} ind={i} handleSelect={this.handleSelect}/>
